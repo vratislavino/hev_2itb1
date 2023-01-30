@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
+    [SerializeField]
+    private bool ChangeStateInTime = true;
+
     private StateEnum playerState;
 
     [SerializeField]
@@ -11,16 +14,27 @@ public class PlayerState : MonoBehaviour
 
     private float timeToChangeState;
 
+    [SerializeField]
+    List<Material> materials;
+
+    [SerializeField]
+    private MeshRenderer quadRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
-        playerState = StateEnum.Paper;
+        playerState = (StateEnum) Random.Range(0,3);
+        quadRenderer.material = materials[(int) playerState];
+        
         timeToChangeState = StateDuration;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!ChangeStateInTime)
+            return;
+
         if(timeToChangeState > 0) {
             timeToChangeState -= Time.deltaTime;
             if(timeToChangeState <= 0) {
@@ -32,6 +46,7 @@ public class PlayerState : MonoBehaviour
     private void ChangeState() {
         timeToChangeState = StateDuration;
         playerState = GetRandomState(playerState);
+        quadRenderer.material = materials[(int)playerState];
     }
 
     private StateEnum GetRandomState(StateEnum currentState) {
