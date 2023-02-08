@@ -9,6 +9,8 @@ public class PlayerState : MonoBehaviour
 
     private StateEnum playerState;
 
+    public StateEnum PlayerStateEnum => playerState;
+
     [SerializeField]
     private float StateDuration;
 
