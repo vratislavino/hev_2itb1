@@ -21,6 +21,7 @@ public class PlayerMovement2D : MonoBehaviour
     private float xMove = 0;
 
     public bool isGrounded = false;
+    private bool jumpedInAir = false;
 
     // TODO: Double jump
 
@@ -36,6 +37,7 @@ public class PlayerMovement2D : MonoBehaviour
             isGrounded = false;
         } else {
             isGrounded = true;
+            jumpedInAir = false;
         }
     }
 
@@ -45,18 +47,26 @@ public class PlayerMovement2D : MonoBehaviour
         CheckGrounded();
 
         xMove = 0;
-
+        var yMove = rb.velocity.y; 
+            
         if (Input.GetKey(KeyCode.D)) {
             xMove = speed;
         }
         if(Input.GetKey(KeyCode.A)) {
             xMove = -speed;
         }
-        
-        if(Input.GetKeyDown(KeyCode.Space)) {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (isGrounded) {
+                yMove = jumpForce;
+            } else {
+                if(!jumpedInAir) {
+                    yMove = jumpForce;
+                    jumpedInAir = true;
+                }
+            }
         }
 
-        rb.velocity = new Vector2(xMove, rb.velocity.y);
+        rb.velocity = new Vector2(xMove, yMove);
     }
 }
