@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Majak/MajakGame.unity
-    guid: 1af959730687a004c9b7e209a035b751
+    path: Assets/Skakacka2D/Game.unity
+    guid: 72c03ba7a663a5c46942ecc74dcdc8eb
+  - enabled: 1
+    path: Assets/Skakacka2D/Level1.unity
+    guid: d9ba8871f51ccbd47bd7f5478173840c
+  - enabled: 1
+    path: Assets/Skakacka2D/Level2.unity
+    guid: e6bf09311a62bc640a89e87b7bed346e
   m_configObjects: {}
