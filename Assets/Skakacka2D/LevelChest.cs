@@ -5,12 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelChest : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
-
-    [SerializeField]
-    private Sprite openedChest;
-    [SerializeField]
-    private Sprite closedChest;
+    private Animator chestAnimator;
 
     bool isPlayerIn = false;
 
@@ -18,7 +13,7 @@ public class LevelChest : MonoBehaviour
     private string levelToLoad;
 
     private void Start() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        chestAnimator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -36,12 +31,12 @@ public class LevelChest : MonoBehaviour
     }
 
     private void OpenChest() {
-        spriteRenderer.sprite = openedChest;
+        chestAnimator.SetBool("Opening", true);
         isPlayerIn = true;
     }
 
     private void CloseChest() {
-        spriteRenderer.sprite = closedChest;
+        chestAnimator.SetBool("Opening", false);
         isPlayerIn = false;
     }
 
