@@ -7,7 +7,7 @@ public class MoreLivesRunner : NormalRunner
     [SerializeField]
     private int maxLives = 2;
 
-    private int currentLives;
+    protected int currentLives;
 
     protected override void Start() {
         base.Start();
@@ -15,10 +15,14 @@ public class MoreLivesRunner : NormalRunner
     }
 
     protected override void Hit() {
-        currentLives--;
+        MinusLife();
         if(currentLives == 0) {
             currentLives = maxLives;
             base.Hit();
         }
+    }
+
+    protected virtual void MinusLife() {
+        currentLives--;
     }
 }

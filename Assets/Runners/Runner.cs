@@ -10,6 +10,9 @@ public abstract class Runner : MonoBehaviour
     [SerializeField]
     protected float speed;
 
+    MeshRenderer meshRenderer;
+    Color originColor;
+
     public void Clicked() {
         Highlight();
         Hit();
@@ -21,8 +24,13 @@ public abstract class Runner : MonoBehaviour
     }
 
     private void Highlight() { 
-        MeshRenderer mesh = GetComponentInChildren<MeshRenderer>();
-        mesh.material.color = Color.blue;
+        meshRenderer.material.color = Color.red;
+        LeanTween.color(meshRenderer.gameObject, originColor, 0.25f);
+    }
+
+    protected void ResetRunner() {
+        transform.position = Vector3.zero;
+        GenerateAngle();
     }
 
     protected abstract void Move();
@@ -30,8 +38,10 @@ public abstract class Runner : MonoBehaviour
     protected abstract void Hit();
 
     // Start is called before the first frame update
-    protected virtual void Start()
-    {
+    protected virtual void Start() {
+        
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+        originColor = meshRenderer.material.color;
         GenerateAngle();
     }
 

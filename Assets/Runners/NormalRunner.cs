@@ -5,7 +5,7 @@ using UnityEngine;
 public class NormalRunner : Runner
 {
     protected override void Hit() {
-        transform.position = Vector3.zero;
+        ResetRunner();
     }
 
     protected override void Move() {

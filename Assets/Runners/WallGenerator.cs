@@ -18,11 +18,11 @@ public class WallGenerator : MonoBehaviour
         GameObject wall;
 
         for(float i = 0; i <= 360 / density; i += density) {
-            x = radius * Mathf.Cos(i);
-            y = radius * Mathf.Sin(i);
+            x = radius * Mathf.Cos(i * Mathf.Deg2Rad);
+            y = radius * Mathf.Sin(i * Mathf.Deg2Rad);
             wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
             wall.transform.position = new Vector3(x, 0, y);
-            wall.transform.rotation = Quaternion.Euler(0, i, 0);
+            wall.transform.rotation = Quaternion.Euler(0, -i, 0);
         }
     }
 }
